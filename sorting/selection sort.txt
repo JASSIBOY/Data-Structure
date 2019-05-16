@@ -1,0 +1,28 @@
+// time complexity in best case O(n2),worst case O(n2)
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int n,i,j,arr[100],index,mini;
+    cout<<"how many no enter"<<endl;
+    cin>>n;
+    for(i=0;i<n;i++)
+        cin>>arr[i];
+    for(i=0;i<n-1;i++)
+    {
+        mini=arr[i];
+        index=i;
+        for(j=i+1;j<n;j++)
+        {
+            if(mini>arr[j])
+            {
+                mini=arr[j];
+                index=j;
+            }
+        }
+        swap(arr[i],arr[index]);
+    }
+    for(i=0;i<n;i++)
+        cout<<arr[i]<<" ";
+    return 0;
+}

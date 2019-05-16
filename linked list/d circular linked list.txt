@@ -1,0 +1,174 @@
+#include<bits/stdc++.h>
+using namespace std;
+class node
+{
+public:
+    node *prev;
+    int data;
+    node *next;
+};
+class dll
+{
+public:
+    node* create();
+    void display(node *);
+    void reversedisplay(node *);
+    node* insertdata(node *);
+    //node* deletedata(node *);
+};
+node* dll :: create()
+{
+    node *head=NULL;
+    node *n,*p,*o;
+    char ch='y';
+    while(ch=='y')
+    {
+        o=head;
+        n=new node();
+        cout<<"enter the data"<<endl;
+        cin>>n->data;
+        n->next=NULL;
+        if(head==NULL)
+        {
+            head=n;
+            n->next=head;
+            p=n;
+        }
+        else
+        {
+            p->next=n;
+            n->prev=p;
+            n->next=o;
+            o->prev=n;
+            p=n;
+        }
+        cout<<"do u want to add more data ? (y/n)"<<endl;
+        cin>>ch;
+    }
+    return head;
+}
+void dll :: display(node *start)
+{
+    node *n;
+    n=start;
+    while(n->next!=start)
+    {
+        cout<<n->data<<"->";
+        n=n->next;
+    }
+    cout<<n->data;
+    cout<<endl;
+}
+void dll :: reversedisplay(node *start)
+{
+    node *n;
+    n=start;
+    int arr[100];//non recursive method
+    int i=0,tot=0;
+    while(n->next!=start)
+    {
+        arr[i]=n->data;
+        n=n->next;
+        i++;
+    }
+    arr[i++]=n->data;
+    tot=i;
+    reverse(arr,arr+tot);
+    for(int i=0;i<tot;i++)
+        cout<<arr[i]<<"->";
+    /*if(n!=NULL);//recursive method
+    {
+        reversedisplay(n->next);
+        cout<<n->data<<"->";
+    }*/
+}
+node* dll:: insertdata(node * start)
+{
+    node *n,*p,*o;
+    int pos;
+    int tot=0;
+    p=start;
+    cout<<"enter the position where u want to data insert ?"<<endl;
+    cin>>pos;
+    n=new node();
+    cout<<"enter the data do u want to insert"<<endl;
+    cin>>n->data;
+    while(p->next!=start)
+        p=p->next;
+    o=p;
+    p=start;
+    if(pos==1)
+    {
+        n->next=start;
+        o->next=n;
+        n->prev=o;
+        start=n;
+    }
+    else
+    {
+        while(p->next!=start)
+        {
+            tot++;
+            if(pos-1==tot)
+            {
+                n->next=p->next;
+                p->next->prev=n;
+                p->next=n;
+                n->prev=p;
+                break;
+            }
+            p=p->next;
+        }
+        cout<<tot;
+        if(pos==tot+2)
+        {
+            n->next=p->next;
+            p->next->prev=n;
+            p->next=n;
+            n->prev=p;
+        }
+    }
+    return start;
+}
+int main()
+{
+    dll d;
+    node *start=NULL;
+    int ch;
+    while(true)
+    {
+        cout<<"\n1. create linked list"<<endl;
+        cout<<"2. display linked list"<<endl;
+        cout<<"3. reverse display linked list"<<endl;
+        cout<<"4. insert a node in the linked list"<<endl;
+        cout<<"//5. delete a node from linked list"<<endl;
+        cout<<"6. exit"<<endl;
+        cout<<"enter your choice "<<endl;
+        cin>>ch;
+        switch(ch)
+        {
+        case 1:
+            start=d.create();
+            break;
+        case 2:
+            d.display(start);
+            break;
+        case 3:
+            d.reversedisplay(start);
+            break;
+        case 4:
+            start=d.insertdata(start);
+            break;
+        /*case 5:
+            start=d.deletedata(start);
+            break;*/
+        case 6:
+            exit(0);
+            break;
+        default:
+            cout<<"wrong choice"<<endl;
+        }
+    }
+
+    return 0;
+}

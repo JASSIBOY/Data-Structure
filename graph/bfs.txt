@@ -1,0 +1,105 @@
+#include<bits/stdc++.h>
+using namespace std;
+class graph
+{
+public:
+    int arr[100][100],queu[1000],state[100];
+    int vertex,edge,fron,rear;
+    graph()
+    {
+        arr[100][100]={0};
+        queu[1000]={0};
+        state[100]={0};
+        vertex=0;
+        edge=0;
+        fron=-1;
+        rear=-1;
+    }
+    //int isEmpty();
+    void creategraph();
+    void bfs();
+
+};
+/*int graph::isEmpty()
+{
+    if(rear==fron)
+        return 1;
+    else
+        return 0;
+}*/
+void graph::bfs()
+{
+    graph g;
+    int ind;
+    for(int i=0;i<vertex;i++)
+        state[i]=0;
+    int source;
+    cout<<"enter the source node"<<endl;
+    cin>>source;
+    queu[++rear]=source;
+    state[source]=1;
+    if(rear!=fron)
+        ind=1;
+    else
+        ind=0;
+    while(ind)
+    {
+        cout<<queu[++fron]<<" ";
+        //queu[fron]=0;
+        state[queu[fron]]=2;
+        for(int i=0;i<vertex;i++)
+        {
+          if(arr[queu[fron]][i]!=0 && state[i]==0)
+          {
+              queu[++rear]=i;
+              state[i]=1;
+          }
+        }
+
+        if(rear!=fron)
+            ind=1;
+        else
+            ind=0;
+    }
+
+}
+void graph::creategraph()
+{
+    cout<<"how many vertex"<<endl;
+    cin>>vertex;
+    cout<<"how many edges are present ? "<<endl;
+    cin>>edge;
+    for(int i=0;i<edge;i++)
+    {
+        arr[i][i]=0;
+        for(int j=i+1;j<vertex;j++)
+        {
+            cout<<"IS there edge between"<<i<<"and "<<j<<endl;
+            char ch;
+            cin>>ch;
+            if(ch=='y'||ch=='Y')
+            {
+                arr[i][j]=1;
+                arr[j][i]=1;
+            }
+            else
+            {
+                arr[i][j]=0;
+                arr[j][i]=0;
+            }
+        }
+    }
+    for(int i=0;i<vertex;i++)
+    {
+        for(int j=0;j<vertex;j++)
+            cout<<arr[i][j]<<" ";
+        cout<<endl;
+    }
+}
+int main()
+{
+    graph g;
+    g.creategraph();
+    g.bfs();
+    return 0;
+}

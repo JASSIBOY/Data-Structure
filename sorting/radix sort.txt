@@ -1,0 +1,56 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+void radixsort(int arr[],int n)
+{
+    int i,j,k,l,m,digit,*maxi,quio,rem,temp,x;
+    maxi=max_element(arr,arr+n);
+    digit=log10(*maxi)+1;
+    int radix[10][100];
+
+    for(i=0;i<digit;i++)
+    {
+        for(int m=0;m<10;m++)
+        {
+            for(int o=0;o<100;o++)
+                radix[m][o]=0;
+        }
+        for(j=0;j<n;j++)
+        {
+            temp=arr[j];
+            quio=temp;
+            for(k=0;k<=i;k++)
+            {
+             rem=quio%10;
+             quio=quio/10;
+            }
+            radix[rem][j]=temp;
+        }
+        l=0;
+        for(int r=0;r<10;r++)
+        {
+            for(x=0;x<n;x++)
+            {
+                if(radix[r][x]!=0)
+                {
+                    int m=radix[r][x];
+                    arr[l]=m;
+                    l++;
+                }
+            }
+        }
+    }
+}
+
+int main()
+{
+    int n,arr[100],i;
+    cout<<" how many number enter "<<endl;
+    cin>>n;
+    for(i=0;i<n;i++)
+        cin>>arr[i];
+    radixsort(arr,n);
+    for(i=0;i<n;i++)
+        cout<<arr[i]<<" ";
+    return 0;
+}

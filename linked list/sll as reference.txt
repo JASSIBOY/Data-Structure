@@ -1,0 +1,277 @@
+#include<bits/stdc++.h>
+using namespace std;
+class node
+{
+public:
+    int data;
+    node *next;
+};
+class sll
+{
+public:
+    void create(node **);
+    void display(node *);
+    void reversedisplay(node *);
+    void insertdata(node **);
+    void deletedata(node **);
+    int count(node * );
+    void swap(node **);
+    void rotate(node **);
+};
+void sll :: create(node **head)
+{
+    //node *head=NULL;
+    node *n,*p;
+    char ch='y';
+    while(ch=='y')
+    {
+        n=new node();
+        cout<<"enter the data"<<endl;
+        cin>>n->data;
+        n->next=NULL;
+        if(*head==NULL)
+        {
+            *head=n;
+            p=n;
+        }
+        else
+        {
+            p->next=n;
+            p=n;
+        }
+        cout<<"do u want to add more data ? (y/n)"<<endl;
+        cin>>ch;
+    }
+    //return head;
+}
+void sll :: display(node *start)
+{
+    node *n;
+    n=start;
+    while(n!=NULL)
+    {
+        cout<<n->data<<"->";
+        n=n->next;
+    }
+    cout<<endl;
+}
+void recursion(node *temp)
+{
+    if(temp!=NULL)
+    {
+        recursion(temp->next);
+        cout<<temp->data<<"->";
+    }
+}
+void sll :: reversedisplay(node *start)
+{
+    /*node *n;
+    n=start;
+    int arr[100];//non recursive method
+    int i=0,tot=0;
+    while(n!=NULL)
+    {
+        arr[i]=n->data;
+        n=n->next;
+        i++;
+    }
+    tot=i;
+    reverse(arr,arr+tot);
+    for(int i=0;i<tot;i++)
+        cout<<arr[i]<<"->";*/
+    /*if(start!=NULL);//recursive method
+    {
+        reversedisplay(start->next);
+        cout<<start->data<<"->";
+    }*/
+    recursion(start);
+}
+void sll:: insertdata(node * * start)
+{
+    node *n,*p;
+    int pos;
+    int tot=0;
+    p=*start;
+    cout<<"enter the position where u want to data insert ?"<<endl;
+    cin>>pos;
+    n=new node();
+    cout<<"enter the data do u want to insert"<<endl;
+    cin>>n->data;
+    if(pos==1)
+    {
+        n->next=*start;
+        *start=n;
+    }
+    else
+    {
+        while(p!=NULL)
+        {
+            tot++;
+            if(pos-1==tot)
+            {
+                n->next=p->next;
+                p->next=n;
+                break;
+            }
+            p=p->next;
+        }
+    }
+   // return start;
+}
+void sll :: deletedata(node **start)
+{
+    node *p,*o;
+    p=*start;
+    int tot=0;
+    /*int pos;//node is deleted position vice
+    cout<<"enter the position of data do u want to delete"<<endl;
+    cin>>pos;
+    while(p!=NULL)
+    {
+        tot++;
+        if(pos==tot==1)
+        {
+            start=p->next;
+            break;
+        }
+        else if(pos-1==tot)
+        {
+            p->next=p->next->next;
+            break;
+        }
+        p=p->next;
+    }*/
+    int val;//node is deleted by data vice
+    cout<<"enter the value do u want to delete"<<endl;
+    cin>>val;
+    while(p!=NULL)
+    {
+        tot++;
+        if(p->data==val && tot==1)
+        {
+            *start=p->next;
+            break;
+        }
+        else if(p->data==val)
+        {
+            o->next=o->next->next;
+            break;
+        }
+        o=p;
+        p=p->next;
+    }
+    //return start;
+}
+int sll:: count(node * start)
+{
+    if(start==NULL)
+        return 0;
+    else
+        return 1+count(start->next);
+}
+void sll :: swap(node**start)
+{
+  node *o,*p,*n,*temp;
+  int val1,val2;
+  cout<<"enter the 1st value do u want to swap"<<endl;
+  cin>>val1;
+  cout<<"enter the second value do u want to swap"<<endl;
+  cin>>val2;
+  p=*start;
+  while(p!=NULL)
+  {
+
+  }
+  if(val1==val2)
+    return;
+  else
+  {
+
+  }
+
+}
+void recursion(node *o,node * p)
+{
+    if(p!=NULL)
+    {
+        o=p;
+        p=p->next;
+        recursion(o,p);
+        p->data=o->data;
+    }
+}
+void sll :: rotate(node** start)
+{
+    node *p,*o,*last;
+
+    cout<<"how many times do u want to rotate ? "<<endl;
+    int rot;
+    cin>>rot;
+    while(rot--)
+    {
+        p=*start;
+        while(p!=NULL)
+        {
+            o=p;
+            p=p->next;
+        }
+        last=p;
+        recursion(o,p);
+    }
+}
+int main()
+{
+    sll s;
+    node *start=NULL;
+    int ch;
+    while(true)
+    {
+        cout<<"\n1. create linked list"<<endl;
+        cout<<"2. display linked list"<<endl;
+        cout<<"3. reverse display linked list"<<endl;
+        cout<<"4. insert a node in the linked list"<<endl;
+        cout<<"5. delete a node from linked list"<<endl;
+        cout<<"6. count the no. of node in linked list"<<endl;
+        cout<<"7. swap node in linked list"<<endl;
+        cout<<"8. rotate linked list"<<endl;
+        cout<<"9. exit"<<endl;
+        cout<<"enter your choice "<<endl;
+        cin>>ch;
+        switch(ch)
+        {
+        case 1:
+            s.create(&start);
+            break;
+        case 2:
+            s.display(start);
+            break;
+        case 3:
+            s.reversedisplay(start);
+            break;
+        case 4:
+            s.insertdata(&start);
+            break;
+        case 5:
+            s.deletedata(&start);
+            break;
+        case 6:
+            int tot;
+            tot=s.count(start);
+            cout<<"total no. of node is : "<<tot<<endl;
+            break;
+        case 7:
+            s.swap(&start);
+            break;
+        case 8:
+            s.rotate(&start);
+            break;
+        case 9:
+            exit(0);
+            break;
+        default:
+            cout<<"wrong choice"<<endl;
+        }
+    }
+
+    return 0;
+}

@@ -1,0 +1,46 @@
+#include<stdio.h>
+
+struct node
+{
+    int data;
+    node *left;
+    node *right;
+};
+void create()
+{
+    struct node *n,*p;
+    int x;
+    while(true)
+    {
+        struct node *n = (struct node*)malloc(sizeof(struct node));
+        printf("enter the data for node\n");
+        scanf("%d",&x);
+        if(n==NULL)
+        {
+            n->data = x;
+            n->left = NULL;
+            n->right = NULL;
+            p=n;
+        }
+        else
+        {
+            printf("data add left or right ??\n");
+            char cho;
+            scanf("%c",&cho);
+            if()
+
+        }
+        printf("do u want to add more data??\n");
+        char ch[10];
+        scanf("%c",&ch);
+        if(ch=='y'||ch=='Y'){}
+        else
+            break;
+    }
+}
+int main()
+{
+    node *n;
+    create();
+    return 0;
+}

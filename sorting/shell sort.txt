@@ -1,0 +1,54 @@
+#include<bits/stdc++.h>
+#include<stdlib.h>
+#include<stdio.h>
+#include<vector>
+#include<math.h>
+#include<string>
+using namespace std;
+
+void shellsort(int arr[],int n)
+{
+    int gap=n,next;
+    gap=gap/2;
+
+    while(gap>0)
+    {
+        for(int i=0;i<n;i++)
+        {
+            next=i+gap;
+            if(next<n)
+            {
+                if(arr[i]>arr[next])
+                    swap(arr[i],arr[next]);
+            }
+            else
+                break;
+        }
+        gap=gap/2;
+        if(gap==0)
+        {
+            for(int i=0;i<n-1;i++)
+            {
+                if(arr[i]<=arr[i+1]){}
+                else
+                {
+                    gap=n/2;
+                    break;
+                }
+            }
+        }
+
+    }
+}
+int main()
+{
+    int n,arr[100],i,j;
+    cout<<" how many number enter "<<endl;
+    cin>>n;
+    for(i=0;i<n;i++)
+        cin>>arr[i];
+    shellsort(arr,n);
+    for(i=0;i<n;i++)
+        cout<<arr[i]<<" ";
+    return 0;
+}
